@@ -1,6 +1,5 @@
 import chroma from "chroma-js"
 import { nanoid } from "nanoid"
-import { colorNames } from "../data/colorNames"
 import { ColorObject } from "../interfaces/interfaces"
 
 export const createRandomNumber = (min: number, max: number): number => {
@@ -41,18 +40,26 @@ export const convertToRgb = (h: number, s: number, l: number): string => {
     return `rgb(${r}, ${g}, ${b})`
 }
 
-export const findColorName = (hexValue: string): string => {
-    let closestMatch: number = 100
-    let closestName: string = ""
-
-    //chroma.deltaE calculates color difference
-    //resulting values range from 0 (no difference) to 100 (max difference)
-    colorNames.forEach((entry) => {
-        const colorDifference = chroma.deltaE(hexValue, entry.hex)
+export const findClosestColorName = (colorNames : [], hexValue : string) : string => {
+    let low = 0,
+        high = colorNames.length - 1
+    let closestMatch = Number.MAX_SAFE_INTEGER,
+        closestName = ""
+    while (low <= high) {
+        const mid = Math.floor((low + high) / 2)
+        const colorDifference = chroma.deltaE(hexValue, colorNames[mid].hex)
         if (colorDifference < closestMatch) {
             closestMatch = colorDifference
-            closestName = entry.name
+            closestName = colorNames[mid].name
         }
-    })
+        if (colorDifference === 0) {
+            break
+        }
+        if (hexValue > colorNames[mid].hex) {
+            low = mid + 1
+        } else {
+            high = mid - 1
+        }
+    }
     return closestName
 }

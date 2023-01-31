@@ -1,7 +1,12 @@
 import chroma from "chroma-js"
 import React from "react"
-import { convertToHexValue, convertToRgb } from "../helpers/helperFunctions"
-import { findColorName } from "../helpers/helperFunctions"
+import { sortedColorNames } from "../data/sortedColorNames"
+import {
+    convertToHexValue,
+    convertToRgb,
+    findClosestColorName,
+    findColorName,
+} from "../helpers/helperFunctions"
 
 const Color = (props: any) => {
     let lockIconPath: string = props.isLocked
@@ -11,7 +16,7 @@ const Color = (props: any) => {
     const hslValue: string = `hsl(${props.h}, ${props.s}%, ${props.l}%)`
     const hexValue: string = convertToHexValue(props.h, props.s, props.l)
     const rgbValue: string = convertToRgb(props.h, props.s, props.l)
-    const colorName = findColorName(hexValue)
+    const colorName = findClosestColorName(sortedColorNames, hexValue)
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(hexValue)
@@ -67,7 +72,6 @@ const Color = (props: any) => {
 
             <span>{colorName}</span>
             <span>{hexValue}</span>
-
         </div>
     )
 }
