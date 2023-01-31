@@ -1,6 +1,6 @@
 import chroma from "chroma-js"
 import { nanoid } from "nanoid"
-import { ColorObject } from "../interfaces/interfaces"
+import { ColorName, ColorObject } from "../interfaces/interfaces"
 
 export const createRandomNumber = (min: number, max: number): number => {
     const randomNumber: number = Math.floor(Math.random() * (max + 1)) + min
@@ -40,7 +40,10 @@ export const convertToRgb = (h: number, s: number, l: number): string => {
     return `rgb(${r}, ${g}, ${b})`
 }
 
-export const findClosestColorName = (colorNames : [], hexValue : string) : string => {
+export const findClosestColorName = (
+    colorNames: ColorName[],
+    hexValue: string
+): string => {
     let low = 0,
         high = colorNames.length - 1
     let closestMatch = Number.MAX_SAFE_INTEGER,
@@ -62,4 +65,15 @@ export const findClosestColorName = (colorNames : [], hexValue : string) : strin
         }
     }
     return closestName
+}
+
+export const checkContrastRatio = (hexValue: string): string => {
+    //contrast of 4.5:1 is recommended to ensure text is readable
+    const contrastRatio: number = chroma.contrast(hexValue, "#000000")
+
+    if (contrastRatio > 4.5) {
+        return "text-gray-800"
+    } else {
+        return "text-gray-200"
+    }
 }

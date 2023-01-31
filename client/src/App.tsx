@@ -18,7 +18,6 @@ const App = () => {
     const lockColor = (id: string) => {
         setColors((prevColors) =>
             prevColors.map((color) => {
-                console.log(color.id, id)
                 return color.id === id
                     ? { ...color, isLocked: !color.isLocked }
                     : color
@@ -83,7 +82,7 @@ const App = () => {
                 <button onClick={increaseColors}>Add</button>
                 <button onClick={decreaseColors}>Subtract</button>
             </section>
-            <section className="flex flex-grow">{colorElements}</section>
+            <section className="flex flex-col flex-grow sm:flex-row">{colorElements}</section>
         </div>
     )
 }

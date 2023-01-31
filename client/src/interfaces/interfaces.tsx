@@ -5,3 +5,8 @@ export interface ColorObject {
     isLocked: boolean
     id: string
 }
+
+export interface ColorName {
+    name: string
+    hex: string
+}
