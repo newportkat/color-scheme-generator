@@ -38,7 +38,9 @@ const Color = (props: any) => {
     return (
         <div
             style={{ backgroundColor: `${hslValue}` }}
-            className={`flex-grow flex-1 group ${textColor}`}
+            className={`flex-grow flex-1 group ${
+                textColor ? textColor : "text-gray-200"
+            }`}
         >
             <div className="invisible group-hover:visible h-full flex flex-row-reverse justify-around items-center lg:flex-col">
                 <div className="flex flex-row-reverse gap-8 lg:flex-col">
