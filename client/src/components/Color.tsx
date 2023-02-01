@@ -1,5 +1,5 @@
 import chroma from "chroma-js"
-import React from "react"
+import React, { useState } from "react"
 import { sortedColorNames } from "../data/sortedColorNames"
 import {
     checkContrastRatio,
@@ -9,32 +9,38 @@ import {
 } from "../helpers/helperFunctions"
 
 const Color = (props: any) => {
+    const [hue, setHue] = useState(props.h)
+    const [saturation, setSaturation] = useState(props.s)
+    const [lightness, setLightness] = useState(props.l)
+
     let lockIconPath: string = props.isLocked
         ? "M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
         : "M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
 
-    const hslValue: string = `hsl(${props.h}, ${props.s}%, ${props.l}%)`
-    const hexValue: string = convertToHexValue(props.h, props.s, props.l)
-    const rgbValue: string = convertToRgb(props.h, props.s, props.l)
+    const hslValue: string = `hsl(${hue}, ${saturation}%, ${lightness}%)`
+    const hexValue: string = convertToHexValue(hue, saturation, lightness)
+    const rgbValue: string = convertToRgb(hue, saturation, lightness)
     const colorName = findClosestColorName(sortedColorNames, hexValue)
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(hexValue)
+    const copyToClipboard = (value: string) => {
+        navigator.clipboard.writeText(value)
     }
 
     const contrastRatioColor = checkContrastRatio(hexValue)
 
     const textColor = `text-${contrastRatioColor}`
-    const hoverColor =
-        textColor === "text-gray-800" ? "white" : "gray-900"
+    const hoverColor = textColor === "text-gray-800" ? "white" : "gray-900"
 
     return (
         <div
             style={{ backgroundColor: `${hslValue}` }}
             className={`flex-grow flex-1 group ${textColor}`}
         >
-            <div className="invisible group-hover:visible flex flex-row-reverse justify-between items-center h-full p-10 sm:flex-col sm:justify-evenly sm:gap-20">
-                <div className="flex gap-8 flex-row-reverse sm:flex-col">
+            <div
+                id="container"
+                className="invisible group-hover:visible h-full flex flex-row-reverse justify-around items-center lg:flex-col"
+            >
+                <div className="flex flex-row-reverse gap-8 lg:flex-col">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -51,7 +57,6 @@ const Color = (props: any) => {
                             d="M6 18L18 6M6 6l12 12"
                         />
                     </svg>
-
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -74,7 +79,9 @@ const Color = (props: any) => {
                         strokeWidth={1.5}
                         stroke="currentColor"
                         className={`w-9 h-9 stroke-2 p-1 cursor-pointer rounded transition hover:backdrop-contrast-75 hidden sm:block`}
-                        onClick={copyToClipboard}
+                        onClick={() => {
+                            copyToClipboard(hexValue)
+                        }}
                     >
                         <path
                             strokeLinecap="round"
@@ -83,11 +90,56 @@ const Color = (props: any) => {
                         />
                     </svg>
                 </div>
-                <div className="flex gap-8 items-center text-center sm:flex-col">
-                    <span className="visible uppercase text-xl font-bold">
+
+                <div className="hidden lg:flex lg:flex-col gap-5">
+                    <input
+                        type="range"
+                        min="0"
+                        max="360"
+                        value={hue}
+                        onChange={(event) => {
+                            setHue(event.target.value)
+                        }}
+                        className="w-28 cursor-pointer"
+                    />
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={saturation}
+                        onChange={(event) => {
+                            setSaturation(event.target.value)
+                        }}
+                        className="w-28 cursor-pointer"
+                    />
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={lightness}
+                        onChange={(event) => {
+                            setLightness(event.target.value)
+                        }}
+                        className="w-28 cursor-pointer"
+                    />
+                </div>
+
+                <div className="flex flex-col gap-2 lg:text-center">
+                    <span
+                        className="visible uppercase text-xl font-bold cursor-pointer"
+                        onClick={() => {
+                            copyToClipboard(hexValue)
+                        }}
+                    >
                         {hexValue.replace("#", "")}
                     </span>
-                    <span className="capitalize hidden sm:group-hover:block">
+
+                    <span
+                        className="visible capitalize text-sm cursor-pointer flex-shrink-0"
+                        onClick={() => {
+                            copyToClipboard(colorName)
+                        }}
+                    >
                         {colorName}
                     </span>
                 </div>

@@ -161,12 +161,10 @@ const App = () => {
 
     const decreaseColors = () => {
         if (numberOfColors > 2) {
-            if (colors[numberOfColors - 1].isLocked === true) {
-                alert("Last color locked!")
-            } else {
+            if (colors[numberOfColors - 1].isLocked === false) {
                 setNumberOfColors((prevNumber) => prevNumber - 1)
                 setColors(colors.slice(0, colors.length - 1))
-            }
+            } 
         }
     }
 
@@ -254,7 +252,7 @@ const App = () => {
                     </svg>
                 </div>
             </section>
-            <section className="flex flex-col flex-grow sm:flex-row">
+            <section className="flex flex-col flex-grow lg:flex-row">
                 {colorElements}
             </section>
         </div>
