@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import Color from "./components/Color"
 import { modeNames } from "./data/modeNames"
 import {
@@ -169,13 +170,15 @@ const App = () => {
     }
 
     const savePalette = () => {
-        let savedPalettes: any[] = JSON.parse(localStorage.getItem("savedPalettes") || "[]")
+        let savedPalettes: any[] = JSON.parse(
+            localStorage.getItem("savedPalettes") || "[]"
+        )
         savedPalettes.push(colors)
         localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes))
     }
 
     const deleteSavedPalettes = () => {
-       localStorage.clear()
+        localStorage.clear()
     }
 
     const colorElements = colors.map((color) => (
@@ -224,18 +227,19 @@ const App = () => {
                             <option key={mode.id}>{mode.name}</option>
                         ))}
                     </select>
-                    <button onClick={savePalette} className="hidden lg:block py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800">
-                        Save
-                    </button>
-                    <button className="hidden lg:block py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800">
-                        My Palettes
-                    </button>
-                    <button
-                        onClick={deleteSavedPalettes}
+                    <Link
+                        to="/saved"
                         className="hidden lg:block py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800"
                     >
-                        Delete All
+                        My Palettes
+                    </Link>
+                    <button
+                        onClick={savePalette}
+                        className="hidden lg:block py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800"
+                    >
+                        Save
                     </button>
+                    
                 </div>
                 <div className="flex items-center gap-6">
                     <svg
