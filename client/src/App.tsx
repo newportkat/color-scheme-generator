@@ -182,21 +182,45 @@ const App = () => {
 
     return (
         <div className="flex flex-col h-screen bg-gray-200 ">
-            <section className="flex flex-col justify-center items-center p-6 gap-6">
-                <h1 className="text-2xl font-bungee tracking-widest">
-                    Palette&nbsp; Pro
-                </h1>
-                <select
-                    name="mode"
-                    className="bg-gray-100 border border-gray-300 text-gray-900 text-sm tracking-wider rounded focus:ring-gray-900 focus:border-gray-900 block w-full p-3"
-                    onChange={(event) => {
-                        setMode(event.target.value)
-                    }}
-                >
-                    {modeNames.map((mode) => (
-                        <option key={mode.id}>{mode.name}</option>
-                    ))}
-                </select>
+            <section className="flex flex-col justify-center items-center p-6 gap-4">
+                <div className="flex items-center justify-center w-full gap-6">
+                    <h1 className="text-2xl font-bungee tracking-widest">
+                        Palette&nbsp; Pro
+                    </h1>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-10 h-10 p-1 rounded cursor-pointer hover:backdrop-contrast-75 lg:hidden"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                        />
+                    </svg>
+                </div>
+                <div className="flex w-full items-center justify-center gap-4">
+                    <select
+                        name="mode"
+                        className="bg-gray-100 border border-gray-300 text-gray-900 text-sm tracking-wider rounded focus:ring-gray-900 focus:border-gray-900 block p-3 w-96 h-full"
+                        onChange={(event) => {
+                            setMode(event.target.value)
+                        }}
+                    >
+                        {modeNames.map((mode) => (
+                            <option key={mode.id}>{mode.name}</option>
+                        ))}
+                    </select>
+                    <button className="hidden lg:block py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800">
+                        Save
+                    </button>
+                    <button className="hidden lg:block py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800">
+                        My Palettes
+                    </button>
+                </div>
                 <div className="flex items-center gap-6">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -204,7 +228,7 @@ const App = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-8 h-8 cursor-pointer hover:bg-gray-300 p-1 transition stroke-2 rounded"
+                        className="w-8 h-8 cursor-pointer hover:backdrop-contrast-75 p-1 transition stroke-2 rounded"
                         onClick={decreaseColors}
                     >
                         <path
@@ -241,7 +265,7 @@ const App = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-8 h-8 cursor-pointer hover:bg-gray-300 p-1 transition stroke-2 rounded"
+                        className="w-8 h-8 cursor-pointer hover:backdrop-contrast-75 p-1 transition stroke-2 rounded"
                         onClick={increaseColors}
                     >
                         <path
