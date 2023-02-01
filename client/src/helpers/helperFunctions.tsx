@@ -8,24 +8,6 @@ export const createRandomNumber = (min: number, max: number): number => {
     return randomNumber
 }
 
-export const createNewColor = (): ColorObject => {
-    const h: number = createRandomNumber(0, 360)
-    const s: number = createRandomNumber(0, 100)
-    const l: number = createRandomNumber(0, 100)
-
-    return { h, s, l, isLocked: false, id: nanoid() }
-}
-
-export const createNewColors = (numberOfColors: number): ColorObject[] => {
-    const newColors: ColorObject[] = []
-
-    for (let i = 0; i < numberOfColors; i++) {
-        newColors.push(createNewColor())
-    }
-
-    return newColors
-}
-
 export const convertToHexValue = (h: number, s: number, l: number): string => {
     //chroma requires saturation and lightness to be a % value
     const hexValue = chroma(h, s / 100, l / 100, "hsl").hex()
@@ -77,3 +59,66 @@ export const checkContrastRatio = (hexValue: string): string => {
         return "text-gray-200"
     }
 }
+
+export const createRandomColor = (): ColorObject => {
+    const h: number = createRandomNumber(0, 360)
+    const s: number = createRandomNumber(0, 100)
+    const l: number = createRandomNumber(0, 100)
+
+    return { h, s, l, isLocked: false, id: nanoid() }
+}
+
+export const createRandomInitialColors = (numberOfColors: number): ColorObject[] => {
+    const newColors: ColorObject[] = []
+
+    for (let i = 0; i < numberOfColors; i++) {
+        newColors.push(createRandomColor())
+    }
+
+    return newColors
+}
+
+export const createOneToneColor = (hueValue: number): ColorObject => {
+    const h: number = hueValue
+    const s: number = createRandomNumber(0, 100)
+    const l: number = createRandomNumber(0, 100)
+
+    return { h, s, l, isLocked: false, id: nanoid() }
+}
+
+export const createOneToneColors = (
+    numberOfColors: number,
+    hueValue: number
+): ColorObject[] => {
+    const randomHueValue = createRandomNumber(0, 360)
+    const newColors: ColorObject[] = []
+
+    for (let i = 0; i < numberOfColors; i++) {
+        newColors.push(createOneToneColor(hueValue))
+    }
+
+    return newColors
+}
+
+export const createPerfectColor = (hueValue: number): ColorObject => {
+    const h: number = hueValue
+    const s: number = createRandomNumber(0, 100)
+    const l: number = createRandomNumber(0, 100)
+
+    return { h, s, l, isLocked: false, id: nanoid() }
+}
+
+export const createPerfectColors = (
+    numberOfColors: number,
+    hueValue: number
+): ColorObject[] => {
+    const randomHueValue = createRandomNumber(0, 360)
+    const newColors: ColorObject[] = []
+
+    for (let i = 0; i < numberOfColors; i++) {
+        newColors.push(createOneToneColor(hueValue))
+    }
+
+    return newColors
+}
+

@@ -1,17 +1,39 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Color from "./components/Color"
-import { createNewColor, createNewColors } from "./helpers/helperFunctions"
+import { modeNames } from "./data/modeNames"
+import {
+    createOneToneColor,
+    createOneToneColors,
+    createRandomColor,
+    createRandomInitialColors,
+    createRandomNumber,
+} from "./helpers/helperFunctions"
 import { ColorObject } from "./interfaces/interfaces"
 
 const App = () => {
     const [numberOfColors, setNumberOfColors] = useState(4)
-    const [colors, setColors] = useState(createNewColors(numberOfColors))
+    const [colors, setColors] = useState(
+        createRandomInitialColors(numberOfColors)
+    )
+    const [mode, setMode] = useState("Random")
 
-    const createPalette = () => {
+    const createRandomPalette = () => {
         setColors((prevColors) =>
             prevColors.map((color) => {
-                return color.isLocked ? color : createNewColor()
+                return color.isLocked ? color : createRandomColor()
             })
+        )
+    }
+
+    const createOneTonePalette = () => {
+        const randomHueValue = createRandomNumber(0, 360)
+
+        setColors((prevColors) =>
+            prevColors.map((color) => {
+                return color.isLocked
+                    ? color
+                    : createOneToneColor(randomHueValue)
+            }).sort((a, b) => {return a.l - b.l})
         )
     }
 
@@ -39,7 +61,7 @@ const App = () => {
     const increaseColors = () => {
         if (numberOfColors < 10) {
             setNumberOfColors((prevNumber) => prevNumber + 1)
-            setColors([...colors, createNewColor()])
+            setColors([...colors, createRandomColor()])
         }
     }
 
@@ -67,22 +89,70 @@ const App = () => {
     ))
 
     return (
-        <div className="flex flex-col h-screen">
-            <section>
-                <button
-                    onClick={createPalette}
-                    onKeyDown={(event) => {
-                        if (event.key === "Space" || event.key === "Enter") {
-                            createPalette()
-                        }
+        <div className="flex flex-col h-screen bg-gray-200">
+            <section className="flex flex-col justify-center items-center p-6 gap-6">
+                <h1 className="text-2xl font-bungee tracking-widest">
+                    Palette&nbsp; Pro
+                </h1>
+                <select
+                    name="mode"
+                    className="bg-gray-100 border border-gray-300 text-gray-900 text-sm tracking-wider rounded focus:ring-gray-900 focus:border-gray-900 block w-full p-3"
+                    onChange={(event) => {
+                        setMode(event.target.value)
                     }}
                 >
-                    Generate
-                </button>
-                <button onClick={increaseColors}>Add</button>
-                <button onClick={decreaseColors}>Subtract</button>
+                    {modeNames.map((mode) => (
+                        <option key={mode.id}>{mode.name}</option>
+                    ))}
+                </select>
+                <div className="flex items-center gap-6">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-8 h-8 cursor-pointer hover:bg-gray-300 p-1 transition stroke-2 rounded"
+                        onClick={decreaseColors}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19.5 12h-15"
+                        />
+                    </svg>
+                    <button
+                        className="py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-900 rounded hover:bg-gray-800"
+                        onClick={
+                            mode === "Random"
+                                ? createRandomPalette
+                                : mode === "One Tone Wonder"
+                                ? createOneTonePalette
+                                : () => {}
+                        }
+                    >
+                        Generate
+                    </button>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-8 h-8 cursor-pointer hover:bg-gray-300 p-1 transition stroke-2 rounded"
+                        onClick={increaseColors}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 4.5v15m7.5-7.5h-15"
+                        />
+                    </svg>
+                </div>
             </section>
-            <section className="flex flex-col flex-grow sm:flex-row">{colorElements}</section>
+            <section className="flex flex-col flex-grow sm:flex-row">
+                {colorElements}
+            </section>
         </div>
     )
 }
