@@ -22,7 +22,11 @@ const Color = (props: any) => {
         navigator.clipboard.writeText(hexValue)
     }
 
-    const textColor = checkContrastRatio(hexValue)
+    const contrastRatioColor = checkContrastRatio(hexValue)
+
+    const textColor = `text-${contrastRatioColor}`
+    const hoverColor =
+        textColor === "text-gray-800" ? "white" : "gray-900"
 
     return (
         <div
@@ -37,7 +41,8 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-6 h-6 cursor-pointer"
+                        className={`w-9 h-9 stroke-2 p-1 cursor-pointer rounded transition hover:backdrop-contrast-75`}
+                        style={{}}
                         onClick={props.isLocked ? () => {} : props.deleteColor}
                     >
                         <path
@@ -53,7 +58,7 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-6 h-6 cursor-pointer"
+                        className={`w-9 h-9 stroke-2 p-1.5 cursor-pointer rounded transition hover:backdrop-contrast-75`}
                         onClick={props.lockColor}
                     >
                         <path
@@ -68,7 +73,7 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-6 h-6 cursor-pointer hidden sm:block"
+                        className={`w-9 h-9 stroke-2 p-1 cursor-pointer rounded transition hover:backdrop-contrast-75 hidden sm:block`}
                         onClick={copyToClipboard}
                     >
                         <path

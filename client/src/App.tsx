@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react"
 import Color from "./components/Color"
 import { modeNames } from "./data/modeNames"
 import {
-    createOneToneColor,
-    createOneToneColors,
+    createChicColor,
+    createDreamyColor,
+    createElectricColor,
+    createHueValueColor,
     createRandomColor,
     createRandomInitialColors,
     createRandomNumber,
@@ -26,14 +28,106 @@ const App = () => {
     }
 
     const createOneTonePalette = () => {
-        const randomHueValue = createRandomNumber(0, 360)
+        const newHueValue = createRandomNumber(0, 360)
 
         setColors((prevColors) =>
-            prevColors.map((color) => {
+            prevColors
+                .map((color) => {
+                    return color.isLocked
+                        ? color
+                        : createHueValueColor(newHueValue)
+                })
+                .sort((a, b) => {
+                    return a.l - b.l
+                })
+        )
+    }
+
+    const createPerfectPalette = () => {
+        const newHueValue = createRandomNumber(0, 360)
+
+        //complementary values are separated by 180° in hue value
+        //hue values wrap after 360° so must use % operator
+        const complementaryHueValue = (newHueValue + 180) % 360
+
+        setColors((prevColors) =>
+            prevColors.map((color, index) => {
                 return color.isLocked
                     ? color
-                    : createOneToneColor(randomHueValue)
-            }).sort((a, b) => {return a.l - b.l})
+                    : createHueValueColor(
+                          index % 2 === 0 ? newHueValue : complementaryHueValue
+                      )
+            })
+        )
+    }
+
+    const createBffPalette = () => {
+        const newHueValue = createRandomNumber(0, 360)
+
+        //analogic values are separated by 30° or 60° in hue value
+        //hue values wrap after 360° so must use % operator
+        const bffHueValueOne = (newHueValue + 30) % 360
+        const bffHueValueTwo = (newHueValue - 30) % 360
+
+        setColors((prevColors) =>
+            prevColors.map((color, index) => {
+                return color.isLocked
+                    ? color
+                    : createHueValueColor(
+                          index % 3 === 0
+                              ? newHueValue
+                              : index % 3 === 1
+                              ? bffHueValueOne
+                              : bffHueValueTwo
+                      )
+            })
+        )
+    }
+
+    const createTriplePalette = () => {
+        const newHueValue = createRandomNumber(0, 360)
+
+        //triadic values are separated by 120° in hue value
+        //hue values wrap after 360° so must use % operator
+        const tripleHueValueOne = (newHueValue + 120) % 360
+        const tripleHueValueTwo = (newHueValue - 120) % 360
+
+        setColors((prevColors) =>
+            prevColors.map((color, index) => {
+                return color.isLocked
+                    ? color
+                    : createHueValueColor(
+                          index % 3 === 0
+                              ? newHueValue
+                              : index % 3 === 1
+                              ? tripleHueValueOne
+                              : tripleHueValueTwo
+                      )
+            })
+        )
+    }
+
+    const createDreamyPalette = () => {
+        setColors((prevColors) =>
+            prevColors.map((color) => {
+                return color.isLocked ? color : createDreamyColor()
+            })
+        )
+    }
+
+    const createElectricPalette = () => {
+        setColors((prevColors) =>
+            prevColors.map((color) => {
+                return color.isLocked ? color : createElectricColor()
+            })
+        )
+    }
+
+    const createChicPalette = () => {
+        setColors((prevColors) =>
+            prevColors.map((color) => {
+                return color.isLocked ? color : createChicColor()
+            })
         )
     }
 
@@ -128,7 +222,17 @@ const App = () => {
                                 ? createRandomPalette
                                 : mode === "One Tone Wonder"
                                 ? createOneTonePalette
-                                : () => {}
+                                : mode === "Perfect Match"
+                                ? createPerfectPalette
+                                : mode === "BFF Colors"
+                                ? createBffPalette
+                                : mode === "Triple Threat"
+                                ? createTriplePalette
+                                : mode === "Dreamy Delight"
+                                ? createDreamyPalette
+                                : mode === "Electric Vibes"
+                                ? createElectricPalette
+                                : createChicPalette
                         }
                     >
                         Generate
