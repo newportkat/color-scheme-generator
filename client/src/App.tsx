@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react"
 import Color from "./components/Color"
 import { modeNames } from "./data/modeNames"
 import {
-    createChicColor,
-    createDreamyColor,
-    createElectricColor,
     createHueValueColor,
+    createNeutralColor,
+    createPastelColor,
     createRandomColor,
     createRandomInitialColors,
     createRandomNumber,
+    createVibrantColor,
 } from "./helpers/helperFunctions"
 import { ColorObject } from "./interfaces/interfaces"
 
@@ -27,7 +27,7 @@ const App = () => {
         )
     }
 
-    const createOneTonePalette = () => {
+    const createMonochromaticPalette = () => {
         const newHueValue = createRandomNumber(0, 360)
 
         setColors((prevColors) =>
@@ -43,7 +43,7 @@ const App = () => {
         )
     }
 
-    const createPerfectPalette = () => {
+    const createComplementaryPalette = () => {
         const newHueValue = createRandomNumber(0, 360)
 
         //complementary values are separated by 180° in hue value
@@ -61,13 +61,13 @@ const App = () => {
         )
     }
 
-    const createBffPalette = () => {
+    const createAnalagousPalette = () => {
         const newHueValue = createRandomNumber(0, 360)
 
         //analogic values are separated by 30° or 60° in hue value
         //hue values wrap after 360° so must use % operator
-        const bffHueValueOne = (newHueValue + 30) % 360
-        const bffHueValueTwo = (newHueValue - 30) % 360
+        const analagousHueValueOne = (newHueValue + 30) % 360
+        const analagousHueValueTwo = (newHueValue - 30) % 360
 
         setColors((prevColors) =>
             prevColors.map((color, index) => {
@@ -77,20 +77,20 @@ const App = () => {
                           index % 3 === 0
                               ? newHueValue
                               : index % 3 === 1
-                              ? bffHueValueOne
-                              : bffHueValueTwo
+                              ? analagousHueValueOne
+                              : analagousHueValueTwo
                       )
             })
         )
     }
 
-    const createTriplePalette = () => {
+    const createTriadicPalette = () => {
         const newHueValue = createRandomNumber(0, 360)
 
         //triadic values are separated by 120° in hue value
         //hue values wrap after 360° so must use % operator
-        const tripleHueValueOne = (newHueValue + 120) % 360
-        const tripleHueValueTwo = (newHueValue - 120) % 360
+        const triadicHueValueOne = (newHueValue + 120) % 360
+        const triadicHueValueTwo = (newHueValue - 120) % 360
 
         setColors((prevColors) =>
             prevColors.map((color, index) => {
@@ -100,33 +100,33 @@ const App = () => {
                           index % 3 === 0
                               ? newHueValue
                               : index % 3 === 1
-                              ? tripleHueValueOne
-                              : tripleHueValueTwo
+                              ? triadicHueValueOne
+                              : triadicHueValueTwo
                       )
             })
         )
     }
 
-    const createDreamyPalette = () => {
+    const createPastelPalette = () => {
         setColors((prevColors) =>
             prevColors.map((color) => {
-                return color.isLocked ? color : createDreamyColor()
+                return color.isLocked ? color : createPastelColor()
             })
         )
     }
 
-    const createElectricPalette = () => {
+    const createVibrantPalette = () => {
         setColors((prevColors) =>
             prevColors.map((color) => {
-                return color.isLocked ? color : createElectricColor()
+                return color.isLocked ? color : createVibrantColor()
             })
         )
     }
 
-    const createChicPalette = () => {
+    const createNeutralPalette = () => {
         setColors((prevColors) =>
             prevColors.map((color) => {
-                return color.isLocked ? color : createChicColor()
+                return color.isLocked ? color : createNeutralColor()
             })
         )
     }
@@ -164,7 +164,7 @@ const App = () => {
             if (colors[numberOfColors - 1].isLocked === false) {
                 setNumberOfColors((prevNumber) => prevNumber - 1)
                 setColors(colors.slice(0, colors.length - 1))
-            } 
+            }
         }
     }
 
@@ -181,7 +181,7 @@ const App = () => {
     ))
 
     return (
-        <div className="flex flex-col h-screen bg-gray-200">
+        <div className="flex flex-col h-screen bg-gray-200 ">
             <section className="flex flex-col justify-center items-center p-6 gap-6">
                 <h1 className="text-2xl font-bungee tracking-widest">
                     Palette&nbsp; Pro
@@ -218,19 +218,19 @@ const App = () => {
                         onClick={
                             mode === "Random"
                                 ? createRandomPalette
-                                : mode === "One Tone Wonder"
-                                ? createOneTonePalette
-                                : mode === "Perfect Match"
-                                ? createPerfectPalette
-                                : mode === "BFF Colors"
-                                ? createBffPalette
-                                : mode === "Triple Threat"
-                                ? createTriplePalette
-                                : mode === "Dreamy Delight"
-                                ? createDreamyPalette
-                                : mode === "Electric Vibes"
-                                ? createElectricPalette
-                                : createChicPalette
+                                : mode === "Monochromatic"
+                                ? createMonochromaticPalette
+                                : mode === "Complementary"
+                                ? createComplementaryPalette
+                                : mode === "Analogous"
+                                ? createAnalagousPalette
+                                : mode === "Triadic"
+                                ? createTriadicPalette
+                                : mode === "Pastel"
+                                ? createPastelPalette
+                                : mode === "Vibrant"
+                                ? createVibrantPalette
+                                : createNeutralPalette
                         }
                     >
                         Generate

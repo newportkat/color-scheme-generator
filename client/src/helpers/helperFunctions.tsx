@@ -89,14 +89,14 @@ export const createHueValueColor = (hueValue: number): ColorObject => {
     return { h, s, l, isLocked: false, id: nanoid() }
 }
 
-export const createDreamyColor = (): ColorObject => {
+export const createPastelColor = (): ColorObject => {
     const h: number = createRandomNumber(0, 360)
     const s: number = createRandomNumber(30, 50)
     const l: number = createRandomNumber(50, 80)
 
     return { h, s, l, isLocked: false, id: nanoid() }
 }
-export const createElectricColor = (): ColorObject => {
+export const createVibrantColor = (): ColorObject => {
     const h: number = createRandomNumber(0, 360)
     const s: number = createRandomNumber(80, 100)
     const l: number = createRandomNumber(30, 50)
@@ -104,7 +104,7 @@ export const createElectricColor = (): ColorObject => {
     return { h, s, l, isLocked: false, id: nanoid() }
 }
 
-export const createChicColor = (): ColorObject => {
+export const createNeutralColor = (): ColorObject => {
     const h: number = createRandomNumber(0, 360)
     const s: number = createRandomNumber(0, 30)
     const l: number = createRandomNumber(30, 50)

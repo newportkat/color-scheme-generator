@@ -1,5 +1,5 @@
 import chroma from "chroma-js"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { sortedColorNames } from "../data/sortedColorNames"
 import {
     checkContrastRatio,
@@ -12,13 +12,14 @@ const Color = (props: any) => {
     const [hue, setHue] = useState(props.h)
     const [saturation, setSaturation] = useState(props.s)
     const [lightness, setLightness] = useState(props.l)
+    const [textColor, setTextColor] = useState("")
 
     let lockIconPath: string = props.isLocked
         ? "M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
         : "M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
 
-    const hslValue: string = `hsl(${hue}, ${saturation}%, ${lightness}%)`
     const hexValue: string = convertToHexValue(hue, saturation, lightness)
+    const hslValue: string = `hsl(${hue}, ${saturation}%, ${lightness}%)`
     const rgbValue: string = convertToRgb(hue, saturation, lightness)
     const colorName = findClosestColorName(sortedColorNames, hexValue)
 
@@ -26,20 +27,20 @@ const Color = (props: any) => {
         navigator.clipboard.writeText(value)
     }
 
-    const contrastRatioColor = checkContrastRatio(hexValue)
+    useEffect(() => {
+        const hexValue: string = convertToHexValue(hue, saturation, lightness)
+        const contrastRatioColor: string = checkContrastRatio(hexValue)
+        setTextColor(`text-${contrastRatioColor}`)
+    }, [hue, saturation, lightness])
 
-    const textColor = `text-${contrastRatioColor}`
-    const hoverColor = textColor === "text-gray-800" ? "white" : "gray-900"
+    const contrastRatioColor = checkContrastRatio(hexValue)
 
     return (
         <div
             style={{ backgroundColor: `${hslValue}` }}
             className={`flex-grow flex-1 group ${textColor}`}
         >
-            <div
-                id="container"
-                className="invisible group-hover:visible h-full flex flex-row-reverse justify-around items-center lg:flex-col"
-            >
+            <div className="invisible group-hover:visible h-full flex flex-row-reverse justify-around items-center lg:flex-col">
                 <div className="flex flex-row-reverse gap-8 lg:flex-col">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +127,7 @@ const Color = (props: any) => {
 
                 <div className="flex flex-col gap-2 lg:text-center">
                     <span
-                        className="visible uppercase text-xl font-bold cursor-pointer"
+                        className={`visible uppercase text-xl font-bold cursor-pointer`}
                         onClick={() => {
                             copyToClipboard(hexValue)
                         }}

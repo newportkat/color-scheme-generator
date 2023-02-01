@@ -1,12 +1,12 @@
-import {nanoid} from "nanoid"
+import { nanoid } from "nanoid"
 
 export const modeNames = [
-    { name: "Random", id: nanoid()},
-    { name: "One Tone Wonder", id: nanoid()},
-    { name: "Perfect Match", id: nanoid()},
-    { name: "BFF Colors", id: nanoid()},
-    { name: "Triple Threat", id: nanoid()},
-    { name: "Dreamy Delight", id: nanoid()},
-    { name: "Electric Vibes", id: nanoid()},
-    { name: "Classic Chic", id: nanoid()},
+    { name: "Random", id: nanoid() },
+    { name: "Monochromatic", id: nanoid() },
+    { name: "Complementary", id: nanoid() },
+    { name: "Analogous", id: nanoid() },
+    { name: "Triadic", id: nanoid() },
+    { name: "Pastel", id: nanoid() },
+    { name: "Vibrant", id: nanoid() },
+    { name: "Neutral", id: nanoid() },
 ]
