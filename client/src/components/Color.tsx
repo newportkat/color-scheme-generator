@@ -35,11 +35,11 @@ const Color = (props: any) => {
     return (
         <div
             style={{ backgroundColor: `${hslValue}` }}
-            className={`flex-grow flex-1 group ${
+            className={`group flex-1 flex-grow ${
                 textColor ? textColor : "text-gray-200"
             }`}
         >
-            <div className="invisible group-hover:visible h-full flex flex-row-reverse justify-around items-center lg:flex-col">
+            <div className="invisible flex h-full flex-row-reverse items-center justify-around group-hover:visible lg:flex-col">
                 <div className="flex flex-row-reverse gap-8 lg:flex-col">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className={`w-9 h-9 stroke-2 p-1 cursor-pointer rounded transition hover:backdrop-contrast-75`}
+                        className={`h-9 w-9 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75`}
                         style={{}}
                         onClick={props.isLocked ? () => {} : props.deleteColor}
                     >
@@ -63,7 +63,7 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className={`w-9 h-9 stroke-2 p-1.5 cursor-pointer rounded transition hover:backdrop-contrast-75`}
+                        className={`h-9 w-9 cursor-pointer rounded stroke-2 p-1.5 transition hover:backdrop-contrast-75`}
                         onClick={props.lockColor}
                     >
                         <path
@@ -78,7 +78,7 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className={`w-9 h-9 stroke-2 p-1 cursor-pointer rounded transition hover:backdrop-contrast-75 hidden sm:block`}
+                        className={`hidden h-9 w-9 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75 sm:block`}
                         onClick={() => {
                             copyToClipboard(hexValue)
                         }}
@@ -91,7 +91,7 @@ const Color = (props: any) => {
                     </svg>
                 </div>
 
-                <div className="hidden lg:flex lg:flex-col gap-5">
+                <div className="hidden gap-5 lg:flex lg:flex-col">
                     <input
                         type="range"
                         min="0"
@@ -126,7 +126,7 @@ const Color = (props: any) => {
 
                 <div className="flex flex-col gap-2 lg:text-center">
                     <span
-                        className={`visible uppercase text-xl font-bold cursor-pointer`}
+                        className={`visible cursor-pointer text-xl font-bold uppercase`}
                         onClick={() => {
                             copyToClipboard(hexValue)
                         }}
@@ -135,7 +135,7 @@ const Color = (props: any) => {
                     </span>
 
                     <span
-                        className="visible capitalize text-sm cursor-pointer flex-shrink-0"
+                        className="visible flex-shrink-0 cursor-pointer text-sm capitalize"
                         onClick={() => {
                             copyToClipboard(colorName)
                         }}

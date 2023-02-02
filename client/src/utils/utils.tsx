@@ -1,4 +1,5 @@
 import chroma from "chroma-js"
+import html2canvas from "html2canvas"
 import { nanoid } from "nanoid"
 import { ColorName, ColorObject } from "../interfaces/interfaces"
 
@@ -114,4 +115,26 @@ export const createNeutralColor = (): ColorObject => {
 
 export const copyToClipboard = (value: string) => {
     navigator.clipboard.writeText(value)
+}
+
+export const downloadImage = (blob: string, filename: string) => {
+    const fakeLink = window.document.createElement("a")
+    fakeLink.setAttribute("style", "display:none")
+    fakeLink.download = filename
+    fakeLink.href = blob
+
+    document.body.appendChild(fakeLink)
+    fakeLink.click()
+    document.body.removeChild(fakeLink)
+
+    fakeLink.remove()
+}
+
+export const exportAsImage = async (
+    element: HTMLElement,
+    imageFileName: string
+) => {
+    const canvas = await html2canvas(element)
+    const image = canvas.toDataURL("image/png", 1.0)
+    downloadImage(image, imageFileName)
 }

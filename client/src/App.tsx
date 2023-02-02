@@ -191,12 +191,12 @@ const App = () => {
     ))
 
     return (
-        <div className="flex flex-col h-screen bg-gray-200 ">
-            <section className="flex flex-col justify-center items-center p-6 gap-4">
-                <div className="flex items-center justify-center w-full gap-6">
+        <div className="flex h-screen flex-col bg-gray-200 ">
+            <section className="flex flex-col items-center justify-center gap-4 p-6">
+                <div className="flex w-full items-center justify-center gap-6">
                     <Link
                         to="/"
-                        className="text-2xl font-bungee tracking-widest"
+                        className="font-bungee text-2xl tracking-widest"
                     >
                         Palette&nbsp; Pro
                     </Link>
@@ -206,7 +206,7 @@ const App = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-10 h-10 p-1 rounded cursor-pointer hover:backdrop-contrast-75 lg:hidden"
+                        className="h-10 w-10 cursor-pointer rounded p-1 hover:backdrop-contrast-75 lg:hidden"
                     >
                         <path
                             strokeLinecap="round"
@@ -218,7 +218,7 @@ const App = () => {
                 <div className="flex w-full items-center justify-center gap-4">
                     <select
                         name="mode"
-                        className="bg-gray-100 border border-gray-300 text-gray-900 text-sm tracking-wider rounded focus:ring-gray-900 focus:border-gray-900 block p-3 w-96 h-full"
+                        className="block h-full w-96 rounded border border-gray-300 bg-gray-100 p-3 text-sm tracking-wider text-gray-900 focus:border-gray-900 focus:ring-gray-900"
                         onChange={(event) => {
                             setMode(event.target.value)
                         }}
@@ -229,13 +229,13 @@ const App = () => {
                     </select>
                     <Link
                         to="/saved"
-                        className="hidden lg:block py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800"
+                        className="hidden rounded bg-gray-500 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 lg:block"
                     >
                         My Palettes
                     </Link>
                     <button
                         onClick={savePalette}
-                        className="hidden lg:block py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800"
+                        className="hidden rounded bg-gray-500 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 lg:block"
                     >
                         Save
                     </button>
@@ -247,7 +247,7 @@ const App = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-8 h-8 cursor-pointer hover:backdrop-contrast-75 p-1 transition stroke-2 rounded"
+                        className="h-8 w-8 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75"
                         onClick={decreaseColors}
                     >
                         <path
@@ -257,7 +257,7 @@ const App = () => {
                         />
                     </svg>
                     <button
-                        className="py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-900 rounded hover:bg-gray-800"
+                        className="rounded bg-gray-900 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800"
                         onClick={
                             mode === "Random"
                                 ? createRandomPalette
@@ -284,7 +284,7 @@ const App = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-8 h-8 cursor-pointer hover:backdrop-contrast-75 p-1 transition stroke-2 rounded"
+                        className="h-8 w-8 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75"
                         onClick={increaseColors}
                     >
                         <path
@@ -295,7 +295,7 @@ const App = () => {
                     </svg>
                 </div>
             </section>
-            <section className="flex flex-col flex-grow lg:flex-row">
+            <section className="flex flex-grow flex-col lg:flex-row">
                 {colorElements}
             </section>
         </div>

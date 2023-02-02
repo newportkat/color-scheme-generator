@@ -32,44 +32,44 @@ const SavedPalettes = () => {
     ))
 
     return (
-        <div className="flex flex-col h-screen bg-gray-200 ">
-            <section className="flex flex-col justify-center items-center p-6 gap-6">
-                <Link to="/" className="text-2xl font-bungee tracking-widest">
+        <div className="flex h-screen flex-col bg-gray-200 ">
+            <section className="flex flex-col items-center justify-center gap-6 p-6">
+                <Link to="/" className="font-bungee text-2xl tracking-widest">
                     Palette&nbsp; Pro
                 </Link>
                 {savedPalettes.length ? (
-                    <div className="flex flex-col w-full items-center justify-center gap-4">
-                        <p className="text-center tracking-wide leading-relaxed">
+                    <div className="flex w-full flex-col items-center justify-center gap-4">
+                        <p className="text-center leading-relaxed tracking-wide">
                             Click a color to copy the hex code to your clipboard
                             <span className="text-2xl"> 😉</span>
                         </p>
-                        <div className="flex justify-center items-center gap-10 flex-wrap p-6">
+                        <div className="flex flex-wrap items-center justify-center gap-10 p-6">
                             {swatchElements}
                         </div>
-                        <div className="flex gap-8">
+                        <div className="flex flex-wrap gap-8 text-center justify-center">
                             <button
                                 onClick={deleteAllSavedPalettes}
-                                className="py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800"
+                                className="rounded bg-gray-500 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800"
                             >
                                 Delete All
                             </button>
                             <Link
                                 to="/"
-                                className="py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800"
+                                className="rounded bg-gray-500 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800"
                             >
                                 Back Home
                             </Link>
                         </div>
                     </div>
                 ) : (
-                    <div className="flex flex-col w-full items-center justify-center gap-4">
-                        <p className="text-xl text-center flex items-center gap-2">
+                    <div className="flex w-full flex-col items-center justify-center gap-4">
+                        <p className="flex items-center gap-2 text-center text-xl">
                             <span className="text-4xl">😲</span> No saved
                             palettes...
                         </p>
                         <Link
                             to="/"
-                            className="py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 bg-gray-500 rounded hover:bg-gray-800"
+                            className="rounded bg-gray-500 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800"
                         >
                             Take Me Home!
                         </Link>
