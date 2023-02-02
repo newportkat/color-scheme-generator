@@ -1,7 +1,9 @@
+import { nanoid } from "nanoid"
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Color from "./components/Color"
 import { modeNames } from "./data/modeNames"
+import { ColorObject } from "./interfaces/interfaces"
 import {
     createHueValueColor,
     createNeutralColor,
@@ -10,8 +12,7 @@ import {
     createRandomInitialColors,
     createRandomNumber,
     createVibrantColor,
-} from "./helpers/helperFunctions"
-import { ColorObject } from "./interfaces/interfaces"
+} from "./utils/utils"
 
 const App = () => {
     const [numberOfColors, setNumberOfColors] = useState(4)
@@ -147,7 +148,7 @@ const App = () => {
             setNumberOfColors((prevNumber) => prevNumber - 1)
             setColors((prevColors) =>
                 prevColors.filter((color) => {
-                    return color.id != id
+                    return color.id !== id
                 })
             )
         }
@@ -173,12 +174,8 @@ const App = () => {
         let savedPalettes: any[] = JSON.parse(
             localStorage.getItem("savedPalettes") || "[]"
         )
-        savedPalettes.push(colors)
+        savedPalettes.push({ colors, id: nanoid() })
         localStorage.setItem("savedPalettes", JSON.stringify(savedPalettes))
-    }
-
-    const deleteSavedPalettes = () => {
-        localStorage.clear()
     }
 
     const colorElements = colors.map((color) => (
@@ -197,9 +194,12 @@ const App = () => {
         <div className="flex flex-col h-screen bg-gray-200 ">
             <section className="flex flex-col justify-center items-center p-6 gap-4">
                 <div className="flex items-center justify-center w-full gap-6">
-                    <h1 className="text-2xl font-bungee tracking-widest">
+                    <Link
+                        to="/"
+                        className="text-2xl font-bungee tracking-widest"
+                    >
                         Palette&nbsp; Pro
-                    </h1>
+                    </Link>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -239,7 +239,6 @@ const App = () => {
                     >
                         Save
                     </button>
-                    
                 </div>
                 <div className="flex items-center gap-6">
                     <svg

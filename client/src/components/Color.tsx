@@ -5,8 +5,9 @@ import {
     checkContrastRatio,
     convertToHexValue,
     convertToRgb,
+    copyToClipboard,
     findClosestColorName,
-} from "../helpers/helperFunctions"
+} from "../utils/utils"
 
 const Color = (props: any) => {
     const [hue, setHue] = useState(props.h)
@@ -22,10 +23,6 @@ const Color = (props: any) => {
     const hslValue: string = `hsl(${hue}, ${saturation}%, ${lightness}%)`
     const rgbValue: string = convertToRgb(hue, saturation, lightness)
     const colorName = findClosestColorName(sortedColorNames, hexValue)
-
-    const copyToClipboard = (value: string) => {
-        navigator.clipboard.writeText(value)
-    }
 
     useEffect(() => {
         const hexValue: string = convertToHexValue(hue, saturation, lightness)

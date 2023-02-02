@@ -111,3 +111,7 @@ export const createNeutralColor = (): ColorObject => {
 
     return { h, s, l, isLocked: false, id: nanoid() }
 }
+
+export const copyToClipboard = (value: string) => {
+    navigator.clipboard.writeText(value)
+}

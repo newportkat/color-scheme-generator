@@ -5,13 +5,14 @@ const Error = () => {
     return (
         <div className="flex flex-col h-screen bg-gray-200 ">
             <section className="flex flex-col justify-center items-center p-6 gap-6">
-                <h1 className="text-2xl font-bungee tracking-widest">
+                <Link to="/" className="text-2xl font-bungee tracking-widest">
                     Palette&nbsp; Pro
-                </h1>
+                </Link>
 
                 <div className="flex flex-col w-full items-center justify-center gap-4">
                     <p className="text-xl text-center flex items-center gap-2">
-                        <span className="text-4xl">😲</span> Page doesn't exist...
+                        <span className="text-4xl">😲</span> Page doesn't
+                        exist...
                     </p>
                     <Link
                         to="/"

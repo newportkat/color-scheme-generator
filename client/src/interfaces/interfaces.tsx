@@ -10,3 +10,8 @@ export interface ColorName {
     name: string
     hex: string
 }
+
+export interface SavedPalette {
+    colors: ColorObject[],
+    id: string
+}
