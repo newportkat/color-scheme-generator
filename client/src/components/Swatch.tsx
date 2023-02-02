@@ -14,12 +14,12 @@ const Swatch = (props: any) => {
         copyToClipboard(hexValue)
     }
 
-    const hslValues = props.colors.map((color: ColorObject) => (
+    const swatchElements = props.colors.map((color: ColorObject) => (
         <div
             style={{
                 backgroundColor: `hsl(${color.h}, ${color.s}%, ${color.l}%)`,
             }}
-            className="h-10 w-10 cursor-pointer"
+            className="h-12 w-12 cursor-pointer"
             key={color.id}
             onClick={() => {
                 copyHexToClipboard(color.h, color.s, color.l)
@@ -35,7 +35,7 @@ const Swatch = (props: any) => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-10 w-10 cursor-pointer p-1 backdrop-contrast-75 hover:backdrop-contrast-50"
+                className="h-12 w-12 cursor-pointer p-1 backdrop-contrast-75 hover:backdrop-contrast-50"
                 onClick={() => exportAsImage(exportRef.current, props.id)}
             >
                 <path
@@ -44,16 +44,14 @@ const Swatch = (props: any) => {
                     d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
                 />
             </svg>
-            <div className="flex flex-wrap" ref={exportRef}>
-                {hslValues}
-            </div>
+            <div ref={exportRef} className="flex flex-wrap">{swatchElements}</div>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-10 w-10 cursor-pointer p-1 backdrop-contrast-75 hover:backdrop-contrast-50"
+                className="h-12 w-12 cursor-pointer p-1 backdrop-contrast-75 hover:backdrop-contrast-50"
                 onClick={props.deletePalette}
             >
                 <path

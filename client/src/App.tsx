@@ -19,6 +19,7 @@ const App = () => {
     const [colors, setColors] = useState(
         createRandomInitialColors(numberOfColors)
     )
+    const [showMobileMenu, setShowMobileMenu] = useState(false)
     const [mode, setMode] = useState("Random")
 
     const createRandomPalette = () => {
@@ -191,63 +192,50 @@ const App = () => {
     ))
 
     return (
-        <div className="flex h-screen flex-col bg-gray-200 ">
-            <section className="flex flex-col items-center justify-center gap-4 p-6">
-                <div className="flex w-full items-center justify-center gap-6">
-                    <Link
-                        to="/"
-                        className="font-bungee text-2xl tracking-widest"
-                    >
-                        Palette&nbsp; Pro
-                    </Link>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="h-10 w-10 cursor-pointer rounded p-1 hover:backdrop-contrast-75 lg:hidden"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                        />
-                    </svg>
-                </div>
-                <div className="flex w-full items-center justify-center gap-4">
-                    <select
-                        name="mode"
-                        className="block h-full w-96 rounded border border-gray-300 bg-gray-100 p-3 text-sm tracking-wider text-gray-900 focus:border-gray-900 focus:ring-gray-900"
-                        onChange={(event) => {
-                            setMode(event.target.value)
-                        }}
-                    >
-                        {modeNames.map((mode) => (
-                            <option key={mode.id}>{mode.name}</option>
-                        ))}
-                    </select>
+        <div className="flex h-screen flex-col">
+            <section className="flex flex-col items-center justify-center p-4 gap-4 sm:p-6">
+                <Link
+                    to="/"
+                    className="text-center font-bungee text-2xl tracking-widest"
+                >
+                    Palette&nbsp; Pro
+                </Link>
+
+                <select
+                    name="mode"
+                    className="w-full rounded border border-gray-300 bg-gray-100 text-center text-sm tracking-wider text-gray-900 focus:border-gray-900 focus:ring-gray-900 sm:w-1/2 p-2"
+                    onChange={(event) => {
+                        setMode(event.target.value)
+                    }}
+                >
+                    {modeNames.map((mode) => (
+                        <option key={mode.id}>{mode.name}</option>
+                    ))}
+                </select>
+
+                <div className="flex w-full justify-center gap-4 text-center">
                     <Link
                         to="/saved"
-                        className="hidden rounded bg-gray-500 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 lg:block"
+                        className="w-1/2 rounded bg-gray-500 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 p-2 lg:w-1/6"
                     >
                         My Palettes
                     </Link>
                     <button
                         onClick={savePalette}
-                        className="hidden rounded bg-gray-500 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 lg:block"
+                        className="w-1/2 rounded bg-gray-500 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 p-2 lg:w-1/6"
                     >
                         Save
                     </button>
                 </div>
-                <div className="flex items-center gap-6">
+
+                <div className="flex w-full items-center justify-center gap-4 px-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="h-8 w-8 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75"
+                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded stroke-2 p-1 transition hover:backdrop-contrast-75"
                         onClick={decreaseColors}
                     >
                         <path
@@ -256,8 +244,9 @@ const App = () => {
                             d="M19.5 12h-15"
                         />
                     </svg>
+
                     <button
-                        className="rounded bg-gray-900 py-4 px-6 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800"
+                        className="w-1/2 rounded bg-gray-900 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 p-2 lg:w-1/6"
                         onClick={
                             mode === "Random"
                                 ? createRandomPalette
@@ -278,6 +267,7 @@ const App = () => {
                     >
                         Generate
                     </button>
+
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -295,6 +285,7 @@ const App = () => {
                     </svg>
                 </div>
             </section>
+
             <section className="flex flex-grow flex-col lg:flex-row">
                 {colorElements}
             </section>
