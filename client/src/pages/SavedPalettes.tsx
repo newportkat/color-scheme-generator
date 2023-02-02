@@ -62,7 +62,7 @@ const SavedPalettes = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="flex w-full flex-col items-center justify-center gap-4">
+                    <div className="flex w-full flex-col items-center justify-center gap-8 mt-2">
                         <p className="flex items-center gap-2 text-center text-xl">
                             <span className="text-4xl">😲</span> No saved
                             palettes...
