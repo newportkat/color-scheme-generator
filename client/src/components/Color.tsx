@@ -47,8 +47,7 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className={`h-9 w-9 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75`}
-                        style={{}}
+                        className="h-9 w-9 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75 active:backdrop-contrast-50"
                         onClick={props.isLocked ? () => {} : props.deleteColor}
                     >
                         <path
@@ -63,7 +62,7 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className={`h-9 w-9 cursor-pointer rounded stroke-2 p-1.5 transition hover:backdrop-contrast-75`}
+                        className={`h-9 w-9 cursor-pointer rounded stroke-2 p-1.5 transition hover:backdrop-contrast-75 active:backdrop-contrast-50`}
                         onClick={props.lockColor}
                     >
                         <path
@@ -78,7 +77,7 @@ const Color = (props: any) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className={`hidden h-9 w-9 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75 sm:block`}
+                        className="hidden h-9 w-9 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75 active:backdrop-contrast-50 sm:block"
                         onClick={() => {
                             copyToClipboard(hexValue)
                         }}
@@ -100,7 +99,7 @@ const Color = (props: any) => {
                         onChange={(event) => {
                             setHue(event.target.value)
                         }}
-                        className="w-28 cursor-pointer"
+                        className="#090501 w-28 cursor-pointer"
                     />
                     <input
                         type="range"
@@ -126,7 +125,7 @@ const Color = (props: any) => {
 
                 <div className="flex flex-col gap-2 lg:text-center">
                     <span
-                        className={`visible cursor-pointer text-xl font-bold uppercase`}
+                        className={`visible cursor-pointer text-xl font-bold uppercase active:backdrop-contrast-50 sm:p-1 rounded`}
                         onClick={() => {
                             copyToClipboard(hexValue)
                         }}
@@ -135,7 +134,7 @@ const Color = (props: any) => {
                     </span>
 
                     <span
-                        className="visible flex-shrink-0 cursor-pointer text-sm capitalize"
+                        className="visible flex-shrink-0 cursor-pointer text-sm capitalize active:backdrop-contrast-50 sm:p-1 rounded"
                         onClick={() => {
                             copyToClipboard(colorName)
                         }}
