@@ -125,7 +125,7 @@ const Color = (props: any) => {
 
                 <div className="flex flex-col gap-2 lg:text-center">
                     <span
-                        className={`visible cursor-pointer text-xl font-bold uppercase active:backdrop-contrast-50 sm:p-1 rounded`}
+                        className={`visible cursor-pointer rounded text-xl font-bold uppercase active:backdrop-contrast-50 sm:p-1`}
                         onClick={() => {
                             copyToClipboard(hexValue)
                         }}
@@ -134,7 +134,7 @@ const Color = (props: any) => {
                     </span>
 
                     <span
-                        className="visible flex-shrink-0 cursor-pointer text-sm capitalize active:backdrop-contrast-50 sm:p-1 rounded"
+                        className="visible flex-shrink-0 cursor-pointer rounded text-sm capitalize active:backdrop-contrast-50 sm:p-1"
                         onClick={() => {
                             copyToClipboard(colorName)
                         }}
