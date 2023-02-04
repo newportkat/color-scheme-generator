@@ -14,11 +14,16 @@ const SavedPalettes = () => {
     }
 
     const deletePalette = (id: string) => {
-        setSavedPalettes((prevSavedPalettes: SavedPalette[]) =>
-            prevSavedPalettes.filter(
-                (palette: SavedPalette) => palette.id !== id
+        if (savedPalettes.length === 1) {
+            localStorage.clear()
+            setSavedPalettes([])
+        } else {
+            setSavedPalettes((prevSavedPalettes: SavedPalette[]) =>
+                prevSavedPalettes.filter(
+                    (palette: SavedPalette) => palette.id !== id
+                )
             )
-        )
+        }
     }
 
     const swatchElements = savedPalettes.map((palette: SavedPalette) => (
@@ -41,7 +46,7 @@ const SavedPalettes = () => {
                     Palette&nbsp; Pro
                 </Link>
                 {savedPalettes.length ? (
-                    <div className="flex flex-col items-center gap-6 w-full">
+                    <div className="flex w-full flex-col items-center gap-6">
                         <p className="text-center leading-relaxed tracking-wide">
                             Click a color to copy the hex code to your clipboard
                             <span className="text-2xl"> 😉</span>
@@ -52,27 +57,27 @@ const SavedPalettes = () => {
                         <div className="flex w-full flex-wrap justify-center gap-4 text-center">
                             <button
                                 onClick={deleteAllSavedPalettes}
-                                className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 lg:w-1/6"
+                                className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 active:bg-gray-500 sm:w-1/4 lg:w-1/6"
                             >
                                 Delete All
                             </button>
                             <Link
                                 to="/"
-                                className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 lg:w-1/6"
+                                className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 active:bg-gray-500 sm:w-1/4 lg:w-1/6"
                             >
                                 Generator
                             </Link>
                         </div>
                     </div>
                 ) : (
-                    <div className="w-full text-center flex flex-col items-center justify-center gap-6">
+                    <div className="flex w-full flex-col items-center justify-center gap-6 text-center">
                         <p className="flex items-center gap-2">
                             <span className="text-4xl">😲</span> No saved
                             palettes...
                         </p>
                         <Link
                             to="/"
-                            className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 lg:w-1/6"
+                            className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 active:bg-gray-500 sm:w-1/4 lg:w-1/6"
                         >
                             Generator
                         </Link>

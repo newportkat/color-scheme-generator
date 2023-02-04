@@ -193,7 +193,7 @@ const App = () => {
 
     return (
         <div className="flex h-screen flex-col">
-            <section className="flex flex-col items-center justify-center p-4 gap-4 sm:p-6">
+            <section className="flex flex-col items-center justify-center gap-4 p-4 sm:p-6">
                 <Link
                     to="/"
                     className="text-center font-bungee text-2xl tracking-widest"
@@ -203,7 +203,7 @@ const App = () => {
 
                 <select
                     name="mode"
-                    className="w-full rounded border border-gray-300 bg-gray-100 text-center text-sm tracking-wider text-gray-900 focus:border-gray-900 focus:ring-gray-900 sm:w-1/2 p-2"
+                    className="w-full rounded border border-gray-300 bg-gray-100 p-2 text-center text-sm tracking-wider text-gray-900 focus:border-gray-900 focus:ring-gray-900 sm:w-1/2"
                     onChange={(event) => {
                         setMode(event.target.value)
                     }}
@@ -216,13 +216,13 @@ const App = () => {
                 <div className="flex w-full justify-center gap-4 text-center">
                     <Link
                         to="/saved"
-                        className="w-1/2 rounded bg-gray-500 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 p-2 lg:w-1/6"
+                        className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 active:bg-gray-500 sm:w-1/4 lg:w-1/6"
                     >
                         My Palettes
                     </Link>
                     <button
                         onClick={savePalette}
-                        className="w-1/2 rounded bg-gray-500 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 p-2 lg:w-1/6"
+                        className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 active:bg-gray-500 sm:w-1/4 lg:w-1/6"
                     >
                         Save
                     </button>
@@ -235,7 +235,7 @@ const App = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded stroke-2 p-1 transition hover:backdrop-contrast-75"
+                        className="flex h-8 w-8 cursor-pointer items-center justify-center rounded stroke-2 p-1 transition hover:backdrop-contrast-75 active:backdrop-contrast-50"
                         onClick={decreaseColors}
                     >
                         <path
@@ -246,7 +246,7 @@ const App = () => {
                     </svg>
 
                     <button
-                        className="w-1/2 rounded bg-gray-900 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 p-2 lg:w-1/6"
+                        className="w-1/2 rounded bg-gray-900 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 active:bg-gray-900 sm:w-1/4 lg:w-1/6"
                         onClick={
                             mode === "Random"
                                 ? createRandomPalette
@@ -274,7 +274,7 @@ const App = () => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="h-8 w-8 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75"
+                        className="h-8 w-8 cursor-pointer rounded stroke-2 p-1 transition hover:backdrop-contrast-75 active:backdrop-contrast-50"
                         onClick={increaseColors}
                     >
                         <path

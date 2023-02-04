@@ -17,7 +17,7 @@ const Error = () => {
                     </p>
                     <Link
                         to="/"
-                        className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 sm:w-1/4 lg:w-1/6"
+                        className="w-1/2 rounded bg-gray-500 p-2 font-bold tracking-widest text-gray-100 transition duration-200 hover:bg-gray-800 active:bg-gray-500 sm:w-1/4 lg:w-1/6"
                     >
                         Generator
                     </Link>
